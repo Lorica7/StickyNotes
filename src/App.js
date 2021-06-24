@@ -60,10 +60,44 @@ class App extends Component {
    } this.setState({notes: copy})
   }
 
+  searchNotes = (note) => {
+    
+    const lowerN = note.description.toLowerCase();
+  console.log(lowerN)
+   console.log(this.state.searchText)
+    const doesInclude = lowerN.includes(this.state.searchText)
+   
+    if (!doesInclude) {
+      note.doesMatchSearch = false
+    } else {
+      note.doesMatchSearch = true
+    }
+    console.log(note)
+    return note
+   
+  }
+
+  onSearch = (e) => {
+    const searchTerm = e.target.value
+    searchTerm.toLowerCase();
+  
+
+    this.setState ({ searchText: searchTerm })
+    console.log(this.state.searchText)
+    console.log(this.setState)
+      const searchedNotes = this.state.notes.map(this.searchNotes)
+     console.log(searchedNotes)
+}
+    
+  
+  
+
+
+
   render() {
     return (
       <div>
-        <Header searchText={this.state.searchText} addNote={this.addNote}/>
+        <Header onSearch={this.onSearch} addNote={this.addNote} searchText={this.state.searchText}/>
         <NotesList notes={this.state.notes} onType={this.onType}/>
       </div>
     );
