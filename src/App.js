@@ -79,14 +79,40 @@ class App extends Component {
     this.setState ({ searchText: searchTerm })
       const searchedNotes = this.state.notes.map(this.searchNotes)
   console.log(searchedNotes)
-}
+  }
+  
+  onDelete = (targetId) => {
+    const copyD = []
+    const stateNotesD = this.state.notes
+    for (let noteItem of stateNotesD) {
+      if (noteItem.id !== targetId) {
+       copyD.push(noteItem)
+      } 
+   } this.setState({notes: copyD})
+  }
+
+	
+componentDidUpdate = ()=> {
+   const stateString = JSON.stringify(this.state);
+  localStorage.setItem("stateString", stateString);
+
+  }
+  
+  componentDidMount = () => {
+    const storedInfo = localStorage.getItem("stateString")
+    if (storedInfo) {
+      const parsedInfo = JSON.parse(storedInfo)
+      this.setState(parsedInfo)
+      console.log(parsedInfo)
+    }
+  }
     
   
   render() {
     return (
       <div>
         <Header onSearch={this.onSearch} addNote={this.addNote} searchText={this.state.searchText}/>
-        <NotesList notes={this.state.notes} onType={this.onType}/>
+        <NotesList notes={this.state.notes} onType={this.onType} onDelete={this.onDelete}/>
       </div>
     );
   }
