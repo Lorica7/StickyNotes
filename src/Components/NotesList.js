@@ -8,7 +8,7 @@ const NotesList = (props) => {
             {
                 props.notes.map((note) => {
                     if (note.doesMatchSearch)
-                        return <Note title={note.title} description={note.description} key={note.id} />
+                        return (<Note title={note.title} description={note.description} key={note.id} onType={props.onType} id={note.id}/>)
 
                 })
             }
