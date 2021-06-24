@@ -46,7 +46,6 @@ class App extends Component {
   }
   
   onType = (targetID, targetFieldT, targetFieldD) => {
-   
     const copy = []
     const stateNotes = this.state.notes
     for (let item of stateNotes) {
@@ -61,10 +60,7 @@ class App extends Component {
   }
 
   searchNotes = (note) => {
-    
     const lowerN = note.description.toLowerCase();
-  console.log(lowerN)
-   console.log(this.state.searchText)
     const doesInclude = lowerN.includes(this.state.searchText)
    
     if (!doesInclude) {
@@ -72,7 +68,7 @@ class App extends Component {
     } else {
       note.doesMatchSearch = true
     }
-    console.log(note)
+   
     return note
    
   }
@@ -80,20 +76,12 @@ class App extends Component {
   onSearch = (e) => {
     const searchTerm = e.target.value
     searchTerm.toLowerCase();
-  
-
     this.setState ({ searchText: searchTerm })
-    console.log(this.state.searchText)
-    console.log(this.setState)
       const searchedNotes = this.state.notes.map(this.searchNotes)
-     console.log(searchedNotes)
+  console.log(searchedNotes)
 }
     
   
-  
-
-
-
   render() {
     return (
       <div>
